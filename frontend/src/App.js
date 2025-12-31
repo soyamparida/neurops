@@ -1,63 +1,65 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./App.css";
 
 function App() {
-  const [feature1, setFeature1] = useState("");
-  const [feature2, setFeature2] = useState("");
+  const [cpu, setCpu] = useState("");
+  const [memory, setMemory] = useState("");
+  const [errorRate, setErrorRate] = useState("");
+  const [latency, setLatency] = useState("");
   const [result, setResult] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const predict = async () => {
     try {
       const response = await axios.post("http://127.0.0.1:8000/predict", {
-        feature1: parseFloat(feature1),
-        feature2: parseFloat(feature2)
+        cpu_load: parseFloat(cpu),
+        memory_usage: parseFloat(memory),
+        error_rate: parseFloat(errorRate),
+        latency: parseFloat(latency)
       });
       setResult(response.data);
-    } catch (error) {
-      console.error(error);
-      setResult({ error: "Something went wrong" });
+    } catch (err) {
+      alert("Backend not running or invalid input");
     }
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>NeuroOps Prediction</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="number"
-          step="0.01"
-          placeholder="Feature 1"
-          value={feature1}
-          onChange={(e) => setFeature1(e.target.value)}
-          required
-        />
-        <input
-          type="number"
-          step="0.01"
-          placeholder="Feature 2"
-          value={feature2}
-          onChange={(e) => setFeature2(e.target.value)}
-          required
-        />
-        <button type="submit">Predict</button>
-      </form>
+    <div className="container">
+      <header className="header">
+        <h1>NeurOps</h1>
+        <p>AI-Powered Deployment Decision System</p>
+      </header>
 
-      {result && (
-        <div style={{ marginTop: "20px" }}>
-          {result.error ? (
-            <p>{result.error}</p>
-          ) : (
-            <p>
-              Prediction: {result.prediction} <br />
-              Decision: {result.decision}
-            </p>
-          )}
-        </div>
-      )}
+      <section className="description">
+        <h2>About the Project</h2>
+        <p>
+          NeurOps analyzes system metrics (CPU load, memory usage, error rate, and network latency) to predict deployment risk. 
+          The system dynamically decides whether a deployment should PROCEED or ROLLBACK.
+        </p>
+      </section>
+
+      <section className="card">
+        <h2>Deployment Metrics</h2>
+        <input placeholder="CPU Load (0-1)" value={cpu} onChange={e => setCpu(e.target.value)} />
+        <input placeholder="Memory Usage (0-1)" value={memory} onChange={e => setMemory(e.target.value)} />
+        <input placeholder="Error Rate (0-1)" value={errorRate} onChange={e => setErrorRate(e.target.value)} />
+        <input placeholder="Network Latency (ms)" value={latency} onChange={e => setLatency(e.target.value)} />
+
+        <button onClick={predict}>Predict Decision</button>
+
+        {result && (
+          <div className={`result ${result.decision}`}>
+            <h3>Decision: {result.decision}</h3>
+            <p>Failure Probability: {result.failure_probability}</p>
+          </div>
+        )}
+      </section>
+
+      <footer>
+        Built with FastAPI • React • Machine Learning
+      </footer>
     </div>
   );
 }
 
 export default App;
-
