@@ -16,4 +16,4 @@ model.fit(X, y)
 # Save model
 joblib.dump(model, "model.joblib")
 
-print("✅ Model trained and saved as model.joblib")
+print("Model trained and saved as model.joblib")

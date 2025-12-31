@@ -2,3 +2,8 @@ fastapi
 uvicorn
 joblib
 scikit-learn
+numpy
+pandas
+prometheus-client
+sqlalchemy
+psutil

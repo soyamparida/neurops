@@ -72,3 +72,101 @@ footer {
   margin-top: 40px;
   color: gray;
 }
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  border-bottom: 2px solid #333;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  background: #444;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+}
+
+.tabs button.active {
+  background: #007acc;
+}
+
+.alert {
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 5px;
+  border-left: 4px solid;
+}
+
+.alert.critical {
+  background: #ffe6e6;
+  border-color: #ff4444;
+}
+
+.alert.high {
+  background: #fff3e0;
+  border-color: #ff9800;
+}
+
+.alert.info {
+  background: #e3f2fd;
+  border-color: #2196f3;
+}
+
+.alert-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.alert-type {
+  color: #333;
+}
+
+.alert-time {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.metrics-grid {
+  display: grid;
+  gap: 15px;
+}
+
+.metric-item {
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 5px;
+  border-left: 4px solid #007acc;
+}
+
+.metric-time {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.metric-values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.metric-values div {
+  background: white;
+  padding: 8px;
+  border-radius: 3px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.rollback-btn {
+  background: #ff4444 !important;
+  color: white !important;
+}
+
+.rollback-btn:hover {
+  background: #cc3333 !important;
+}
